@@ -14,7 +14,7 @@ from sklearn.svm import SVC
 url = "https://raw.githubusercontent.com/jbrownlee/Datasets/master/iris.csv"
 names = ['sepal-length', 'sepal-width', 'petal-length', 'petal-width', 'class']
 dataset = read_csv(url, names=names)
-# Split-out validation dataset
+# Split-out validation(provided) dataset from regular
 array = dataset.values
 X = array[:, 0:4]
 y = array[:, 4]
@@ -27,7 +27,7 @@ models.append(('KNN', KNeighborsClassifier()))
 models.append(('CART', DecisionTreeClassifier()))
 models.append(('NB', GaussianNB()))
 models.append(('SVM', SVC(gamma='auto')))
-# evaluate each model in turn
+# See how the models do
 results = []
 names = []
 for name, model in models:
@@ -36,7 +36,7 @@ for name, model in models:
     results.append(cv_results)
     names.append(name)
     print('%s: %f (%f)' % (name, cv_results.mean(), cv_results.std()))
-# Compare Algorithms
+# Compare Algorithms (SVM and LDA both at 1.00 - Best choices)
 pyplot.boxplot(results, labels=names)
 pyplot.title('Algorithm Comparison')
 pyplot.show()
